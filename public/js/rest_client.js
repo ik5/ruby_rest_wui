@@ -28,6 +28,17 @@ function RestRoutingViewModel() {
     };
 
     self.execRest = function() {
+        var params = {method: self.method(),
+                      address: self.address(),
+                      format: self.format() || '',
+                      content: self.content() || ''};
+        $.post('/request', params).
+            done(function() {
+                console.log(arguments.length);
+            }).
+        error(function(){
+            console.log(arguments.length);
+        });
 
     };
 }
