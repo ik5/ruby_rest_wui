@@ -2,13 +2,14 @@
 #
 
 require 'rubygems'
+require 'json'
 require 'bundler'
 
 Bundler.include
 
 require 'sinatra'
 require 'sinatra/partial'
-require 'json'
+require 'nokogiri'
 
 require_relative 'logic/app'
 
