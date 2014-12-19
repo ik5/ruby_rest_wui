@@ -21,11 +21,10 @@ function RestRoutingViewModel() {
     self.answer              = ko.observable();
 
     self.can_send = function() {
-        if (self.address() === undefined || self.content() === undefined ) {
+        if (self.address() === undefined) {
             return false;
         }
-        return _.isEmpty(self.address().trim()) === false &&
-               _.isEmpty(self.content().trim()) === false;
+        return _.isEmpty(self.address().trim()) === false;
     };
 
     self.execRest = function() {
