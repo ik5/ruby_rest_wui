@@ -1,9 +1,9 @@
 
+METHODS = %q{GET POST PUT DELETE OPTIONS HEAD TRACE}
+
 class REST < Sinatra::Base
   require 'uri'
   require 'net/http'
-
-  METHODS = %q{GET POST PUT DELETE OPTIONS HEAD TRACE}
 
   configure do
     enable :logging, :sessions
@@ -50,21 +50,19 @@ class REST < Sinatra::Base
     http = Net::HTTP.new(uri.host, uri.port)
     res  = build_method(method: method, uri: uri)
 
-    logger.info "format: #{format}"
     res.content_type = format  unless format.empty?
     res.body         = content unless content.empty?
     answer = http.request(res)
 
     result                  = {return_code: answer.code}
     result[:content_type]   = answer['content-type'] if answer.key? 'content-type'
-    result[:body]           = answer['body']
+    result[:body]           = answer.body
     result[:content_length] = answer['content-length'] if answer.key? 'content-length'
     result[:all_headers]    = answer.to_hash
     result.to_json
   end
 
   post '/request' do
-    logger.info params.inspect
     method  = params['method'] || ''
     address = params['address'] || ''
     format  = params['format'] || ''
