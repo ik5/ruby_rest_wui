@@ -4,34 +4,30 @@
       %div.row
         %div.small-12.medium-2.large-2.columns
           %label{for: "method"}="Method:"
-          %select{id: "method", data: {bind: "options: available_method, value: method" }}
-            %option{value: ""}=""
-            %option{value: "GET"}="GET"
-            %option{value: "POST"}="POST"
-            %option{value: "PUT"}="PUT"
-            %option{value: "DELETE"}="DELETE"
-            %option{value: "OPTIONS"}="OPTIONS"
-            %option{value: "HEAD"}="HEAD"
-            %option{value: "TRACE"}="TRACE"
-            %option{value: "CONNECT"}="CONNECT"
+          %select{id: "method",
+                  data: {bind: "options: available_method, value: method" }}
 
         %div.small-12.medium-10.large-10.columns
           %label{for: "address"}="Address:"
-          %input{type: "text", id: "address", placeholder: "http://127.0.0.1/v1/api"}
+          %input{type: "text", id: "address",
+                 placeholder: "http://127.0.0.1/v1/api",
+                 data: {bind: "value: address"}}
 
       %div.row
         %div.small-12.medium-12.large-12.columns
           %label{for: "format"}="Mime Type:"
-          %input{type: "text", id: "format", placeholder: "application/json"}
+          %input{type: "text", id: "format",
+                 placeholder: "application/json",
+                 data: {bind: "value: format"}}
 
       %div.row
         %div.small-12.medium-12.large-12.columns
           %label{for: "content_sending"}="Content:"
-          %textarea{id: "content_sending"}
+          %textarea{id: "content_sending", data:{bind: "value: content"}}
 
       %div.row
         %div.small-12.medium-12.large-12.columns.text-center
-          %a.button="Send"
+          %a{data: {bind: "click: execRest"}}.button="Send"
 
 %div.row
   %div.small-12.medium-12.large-12.columns
@@ -39,13 +35,17 @@
       %div.row
         %div.small-12.medium-2.large-2.columns
           %label{for:"return_code"}="Return Code:"
-          %input{readonly: true, id: "return_code", type: "text"}
+          %input{readonly: true, id: "return_code", type: "number",
+                 data: {bind: 'value: return_code'}}
 
         %div.small-12.medium-10.large-10.columns
           %label{for:"return_content_type"}="Content Type:"
-          %input{readonly: true, id: "return_content_type", type: "text"}
+          %input{readonly: true, id: "return_content_type", type: "text",
+                 data: {bind: 'value: return_content_type'}}
 
       %div.row
         %div.small-12.medium-12.large-12.columns
           %label{for: "answer"}="Answer:"
-          %textarea{id:"answer", readonly: true}
+          %textarea{id:"answer", readonly: true,
+                   data: {bind: 'value: answer'}}
+
