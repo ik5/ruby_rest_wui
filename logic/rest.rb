@@ -17,6 +17,7 @@ class REST < Sinatra::Base
   end
 
   get '/' do
+    haml :index
   end
 
 end
