@@ -8,6 +8,7 @@ Bundler.include
 
 require 'sinatra'
 require 'sinatra/partial'
+require 'json'
 
 require_relative 'logic/rest'
 
