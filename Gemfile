@@ -7,6 +7,7 @@ gem 'multi_json'
 gem 'tilt'
 gem 'builder'
 gem 'nokogiri'
+gem 'sinatra-contrib'
 
 gem 'puma'
 
