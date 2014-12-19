@@ -1,0 +1,7 @@
+/var/linesip/rtc/wui/log/stdout.log {
+  daily
+  compress
+  postrotate
+    kill -HUP `cat /var/linesip/rtc/tmp/puma/puma.pid`
+  endscript
+}
