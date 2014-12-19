@@ -63,9 +63,9 @@ class REST < Sinatra::Base
   end
 
   post '/request' do
-    method  = params['method'] || ''
+    method  = params['method']  || ''
     address = params['address'] || ''
-    format  = params['format'] || ''
+    format  = params['format']  || ''
     content = params['content'] || ''
 
     content_type 'application/json'
