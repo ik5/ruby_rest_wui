@@ -10,8 +10,8 @@ require 'sinatra'
 require 'sinatra/partial'
 require 'json'
 
-require_relative 'logic/rest'
+require_relative 'logic/app'
 
-run REST
+run App
 
 
