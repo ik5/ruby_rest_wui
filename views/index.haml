@@ -4,7 +4,7 @@
       %div.row
         %div.small-12.medium-2.large-2.columns
           %label{for: "method"}="Method:"
-          %select{id: "method", data: {bind: "options: method" }}
+          %select{id: "method", data: {bind: "options: available_method, value: method" }}
             %option{value: ""}=""
             %option{value: "GET"}="GET"
             %option{value: "POST"}="POST"
