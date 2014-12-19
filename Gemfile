@@ -7,7 +7,7 @@ gem 'multi_json'
 gem 'tilt'
 gem 'haml'
 gem 'builder'
-gem 'nokogiri'
+gem 'nokogiri', require: 'nokogiri'
 gem 'sinatra-contrib'
 gem 'sinatra-partial'
 
