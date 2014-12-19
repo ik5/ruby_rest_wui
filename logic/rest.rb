@@ -25,7 +25,7 @@ class REST < Sinatra::Base
   end
 
   def build_method(method:, uri:)
-    m = case method
+    resource = case method
         when 'GET'
           Net::HTTP::Get.new(uri)
         when 'POST'
@@ -41,8 +41,7 @@ class REST < Sinatra::Base
         when 'TRACE'
           Net::HTTP::Trace.new(uri)
         end
-
-    m
+    resource
   end
 
   def make_connection(method:, address:, format:, content:)
@@ -76,7 +75,6 @@ class REST < Sinatra::Base
     unless address =~ URI::DEFAULT_PARSER.regexp[:ABS_URI]
       return {error: 'Invalid address was provided'}.to_json
     end
-
 
     unless format.empty? || MIME::Types.include?(format)
       return {error: 'Unknown Mime Type'}.to_json
