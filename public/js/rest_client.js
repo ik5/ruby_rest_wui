@@ -19,6 +19,18 @@ function RestRoutingViewModel() {
     self.return_code         = ko.observable();
     self.return_content_type = ko.observable();
     self.answer              = ko.observable();
+
+    self.can_send = function() {
+        if (self.address() === undefined || self.content() === undefined ) {
+            return false;
+        }
+        return _.isEmpty(self.address().trim()) === false &&
+               _.isEmpty(self.content().trim()) === false;
+    };
+
+    self.execRest = function() {
+
+    };
 }
 
 var rest_client;
