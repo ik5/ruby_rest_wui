@@ -8,6 +8,7 @@ gem 'tilt'
 gem 'builder'
 gem 'nokogiri'
 gem 'sinatra-contrib'
+gem 'sinatra-partial'
 
 gem 'puma'
 
