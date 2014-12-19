@@ -8,8 +8,7 @@ function RestRoutingViewModel() {
                                                    'DELETE',
                                                    'OPTIONS',
                                                    'HEAD',
-                                                   'TRACE',
-                                                   'CONNECT'
+                                                   'TRACE'
                                                   ]);
     self.method              = ko.observable();
     self.address             = ko.observable();
