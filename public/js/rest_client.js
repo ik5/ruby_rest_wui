@@ -2,6 +2,15 @@
 function RestRoutingViewModel() {
     var self = this;
 
+    self.available_method    = ko.observableArray(['GET',
+                                                   'POST',
+                                                   'PUT',
+                                                   'DELETE',
+                                                   'OPTIONS',
+                                                   'HEAD',
+                                                   'TRACE',
+                                                   'CONNECT'
+                                                  ]);
     self.method              = ko.observable();
     self.address             = ko.observable();
     self.format              = ko.observable();
@@ -12,6 +21,8 @@ function RestRoutingViewModel() {
     self.answer              = ko.observable();
 }
 
+var rest_client;
 $(function(){
-    ko.applyBindings(new RestRoutingViewModel());
+    rest_client = new RestRoutingViewModel();
+    ko.applyBindings(rest_client);
 });
