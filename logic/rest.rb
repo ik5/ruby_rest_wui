@@ -20,12 +20,16 @@ class REST < Sinatra::Base
     haml :index
   end
 
+  get '/test_get' do
+    'test'
+  end
+
   get '/test_json' do
     content_type 'application/json'
     result =  { test: 'ack', params: nil }
     result[:params] = params unless params.keys.empty?
 
-    result
+    result.to_json
   end
 
   get '/test_xml' do
@@ -62,6 +66,7 @@ class REST < Sinatra::Base
         params.each_pair do |k,v|
           xml.param(key: k, value: v)
         end
+      end
     end
 
     builder
