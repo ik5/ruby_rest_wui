@@ -20,4 +20,7 @@ class REST < Sinatra::Base
     haml :index
   end
 
+  post '/request' do
+  end
+
 end
