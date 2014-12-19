@@ -1,0 +1,13 @@
+[Unit]
+Description=REST debugging Web User Interface
+After=network.target
+
+[Service]
+Type=forking
+User=nobody
+ExecStart=bundle exec puma -C config/puma.rb
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+
