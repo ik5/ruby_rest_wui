@@ -1,6 +1,8 @@
 
 class REST < Sinatra::Base
 
+  METHODS = %q{GET POST PUT DELETE OPTIONS HEAD TRACE CONNECT}
+
   configure do
     enable :logging, :sessions
     set :root, File.expand_path(File.join('../',File.basename(__FILE__)))
@@ -21,6 +23,10 @@ class REST < Sinatra::Base
   end
 
   post '/request' do
+    method  = params['method'] || ''
+    address = params['address'] || ''
+    format  = params['format'] || ''
+    content = params['content'] || ''
   end
 
 end
