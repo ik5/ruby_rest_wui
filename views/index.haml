@@ -30,7 +30,7 @@
 
         %div.row
           %div.small-12.medium-12.large-12.columns.text-center
-            %a{class: 'button', data: {bind: "click: execRest"}}="Send"
+            %a{class: 'button', data: {bind: "click: execRest, attr: {'disabled': can_send() === false}"}}="Send"
 
     %div{class: 'small-12 medium-6 large-6 columns'}
       %div{class: 'panel', data: {'equalizer-watch' => ''}}
