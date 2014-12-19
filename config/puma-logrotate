@@ -1,7 +1,7 @@
-/var/linesip/rtc/wui/log/stdout.log {
+ruby_rest_wui/log/stdout.log {
   daily
   compress
   postrotate
-    kill -HUP `cat /var/linesip/rtc/tmp/puma/puma.pid`
+    kill -HUP `cat ruby_rest_wui/tmp/puma/puma.pid`
   endscript
 }
