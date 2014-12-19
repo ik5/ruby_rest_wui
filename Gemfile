@@ -10,6 +10,7 @@ gem 'builder'
 gem 'nokogiri', require: 'nokogiri'
 gem 'sinatra-contrib'
 gem 'sinatra-partial'
+gem 'mime-types'
 
 gem 'puma'
 
