@@ -43,11 +43,16 @@ function RestRoutingViewModel() {
     };
 
     self.add_field = function() {
-        if (self.field_edit() === undefined) {
-
+        var field = self.field_edit();
+        if (field === undefined) {
+            return report_error('Field Edit is empty');
         }
-        if (! _.isEmpty(self.field_edit().trim)) {
-            //if 
+        if (! _.isEmpty(field.trim())) {
+            if (_.indexOf(self.field_list(), field) === -1) {
+                self.field_list.push(field);
+            } else {
+                report_error('Field alreay exists in the list');
+            }
         }
     };
 
