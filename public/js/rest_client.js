@@ -15,6 +15,7 @@ function RestRoutingViewModel() {
     self.format              = ko.observable();
     self.field_list          = ko.observableArray();
     self.field_edit          = ko.observable();
+    self.field_selected      = ko.observable();
     self.content             = ko.observable();
 
     self.return_code         = ko.observable();
@@ -39,7 +40,21 @@ function RestRoutingViewModel() {
     };
 
     self.remove_field = function() {
-        
+        var selected = self.field_selected();
+        if (selected === undefined) {
+            return report_error('No field was selected to be removed');
+        }
+
+        if (! _.isEmpty(selected.trim())) {
+            if (_.indexOf(self.field_list(), selected) > -1) {
+              self.field_list.remove(selected);
+            } else {
+                report_error('Unable to find selected field to remove');
+            }
+        } else {
+            report_error('The selected field to be removed is empty');
+        }
+
     };
 
     self.add_field = function() {
