@@ -1,6 +1,6 @@
 %form
   %div{class: "row", data: { equalizer: ''}}
-    %div.small-12.medium-6.large-6.columns
+    %div.small-12.medium-12.large-12.columns
       %div{class: 'panel', data: {'equalizer-watch' => ''}}
         %h3="Input - Send"
         %br
@@ -52,24 +52,24 @@
           %div.small-12.medium-12.large-12.columns.text-center
             %a{class: 'button', data: {bind: "click: execRest, attr: {'disabled': can_send() === false}"}}="Send"
 
-    %div{class: 'small-12 medium-6 large-6 columns'}
+    %div{class: 'small-12 medium-12 large-12 columns'}
       %div{class: 'panel', data: {'equalizer-watch' => ''}}
         %h3="Output - Result"
         %br
         %div.row
-          %div.small-12.medium-4.large-4.columns
-            %label{for:"return_code"}="Return Code:"
-            %input{readonly: true, id: "return_code", type: "number",
-                   data: {bind: 'value: return_code'}}
+          %div.small-6.medium-6.large-6.columns.text-center.title
+            %strong="Key"
+          %div.small-6.medium-6.large-6.columns.text-center.title
+            %strong="Value"
 
-          %div.small-12.medium-8.large-8.columns
-            %label{for:"return_content_type"}="Mime Type:"
-            %input{readonly: true, id: "return_content_type", type: "text",
-                   data: {bind: 'value: return_content_type'}}
+        %div{data:{bind: "foreach: answer"}}
+          %div.row.list
+            %div.small-6.medium-6.large-6.columns
+              #content{data: {bind: "text: key"}}
+            %div.small-6.medium-6.large-6.columns
+              %pre
+                %code{data: {bind: "text: value"}}
 
-        %div.row
-          %div.small-12.medium-12.large-12.columns
-            %label{for: "answer"}="Answer:"
-            %textarea{id:"answer", readonly: true,
-                     data: {bind: 'value: answer'}}
+
+
 
