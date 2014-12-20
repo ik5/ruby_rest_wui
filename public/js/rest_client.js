@@ -68,6 +68,8 @@ function RestRoutingViewModel() {
             } else {
                 report_error('Field alreay exists in the list');
             }
+        } else {
+            report_error('The field to be added is empty');
         }
     };
 
