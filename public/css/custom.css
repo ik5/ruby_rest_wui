@@ -1,2 +1,4 @@
 label { font-weight: bold; }
 textarea {height: 13em; }
+
+select#field_list { height: 8em; }

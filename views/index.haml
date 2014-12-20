@@ -25,6 +25,22 @@
 
         %div.row
           %div.small-12.medium-12.large-12.columns
+            %label{for: 'field_edit'}="Field Edit:"
+            %input{id: 'field_edit', type: 'text', placeholder: "key=value"}
+
+        %div.row
+          %div.small-12.medium-6.large-6.columns.text-center
+            %a{class: 'small button'}="Add"
+
+          %div.small-12.medium-6.large-6.columns.text-center
+            %a{class: 'small alert button'}="Remove"
+
+        %div.row
+          %label{for: 'field_list'}="Field List:"
+          %select{size: 5, id: 'field_list'}
+
+        %div.row
+          %div.small-12.medium-12.large-12.columns
             %label{for: "content_sending"}="Content:"
             %textarea{id: "content_sending", data:{bind: "value: content"}}
 
