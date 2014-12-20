@@ -78,6 +78,7 @@ function RestRoutingViewModel() {
     self.execRest = function() {
         var params = {method: self.method(),
                       address: self.address(),
+                      field_list: self.field_list(),
                       format: self.format() || '',
                       content: self.content() || ''};
         $.post('/request', params).
@@ -104,7 +105,7 @@ function RestRoutingViewModel() {
 
             }).
         error(function(){
-            console.log(arguments.length);
+            report_error('Unable to communicate with the server');
         });
 
     };
