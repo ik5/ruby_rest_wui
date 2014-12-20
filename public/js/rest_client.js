@@ -32,11 +32,13 @@ function RestRoutingViewModel() {
     };
 
     self.is_add_available = function() {
-        return true;
+        var field = self.field_edit();
+        return field !== undefined && _.indexOf(self.field_list(), field) === -1;
     };
 
     self.is_remove_available = function() {
-        return true;
+        var selected = self.field_selected();
+        return selected !== undefined && _.indexOf(self.field_list(), selected) > -1;
     };
 
     self.remove_field = function() {
