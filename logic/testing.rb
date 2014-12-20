@@ -2,6 +2,7 @@ class Testing < Sinatra::Base
 
   configure do
     set :root, File.expand_path(File.join('../',File.basename(__FILE__)))
+    enable :logging
   end
 
   configure :development do
