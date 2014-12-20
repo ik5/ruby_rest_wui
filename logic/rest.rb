@@ -67,7 +67,7 @@ class REST < Sinatra::Base
           Net::HTTP::Trace.new(uri)
         end
 
-    if (method == 'POST' || method == 'POST') && parameters
+    if (method == 'POST' || method == 'PUT') && parameters
       params = params_to_hash(parameters)
       resource.set_form_data(params)
     end
