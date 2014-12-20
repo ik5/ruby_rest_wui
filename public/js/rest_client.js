@@ -13,6 +13,8 @@ function RestRoutingViewModel() {
     self.method              = ko.observable();
     self.address             = ko.observable();
     self.format              = ko.observable();
+    self.field_list          = ko.observableArray();
+    self.field_edit          = ko.observable();
     self.content             = ko.observable();
 
     self.return_code         = ko.observable();
