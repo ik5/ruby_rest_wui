@@ -1,15 +1,15 @@
 # config/puma.rb
-#threads 0,32 # production
-workers 2
-threads 0,16
-workers 0
+#threads 0 ,32 # production
+#workers 2 # production
+threads 0,16 # development/testing
+workers 0 # development/testing
 port 3000
 
 #daemonize # production
 
-$app_path = File.expand_path(File.join(File.dirname(__FILE__), '..'))
-tmp_dir  = "#{$app_path}/tmp"
-log_dir  = "#{$app_path}/log"
+app_path = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+tmp_dir  = "#{app_path}/tmp"
+log_dir  = "#{app_path}/log"
 tmp_puma = "#{tmp_dir}/puma"
 dirs = []
 dirs << log_dir  unless (File.directory? log_dir)
