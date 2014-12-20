@@ -32,19 +32,24 @@ function RestRoutingViewModel() {
 
     self.is_add_available = function() {
         return true;
-    }
+    };
 
-    self is_remove_available = function() {
+    self.is_remove_available = function() {
         return true;
-    }
+    };
 
     self.remove_field = function() {
         
-    }
+    };
 
     self.add_field = function() {
+        if (self.field_edit() === undefined) {
 
-    }
+        }
+        if (! _.isEmpty(self.field_edit().trim)) {
+            //if 
+        }
+    };
 
     self.execRest = function() {
         var params = {method: self.method(),
