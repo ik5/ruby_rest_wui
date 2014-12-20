@@ -18,10 +18,6 @@ function RestRoutingViewModel() {
     self.field_selected      = ko.observable();
     self.content             = ko.observable();
 
-    self.return_code         = ko.observable();
-    self.return_content_type = ko.observable();
-    self.content_length      = ko.observable();
-    self.all_headers         = ko.observableArray();
     self.answer              = ko.observable();
 
     self.can_send = function() {
@@ -83,25 +79,7 @@ function RestRoutingViewModel() {
                       content: self.content() || ''};
         $.post('/request', params).
             done(function(data, req_status, req_obj) {
-                if (_.has(data, 'return_code')) {
-                    self.return_code(data.return_code);
-                }
-
-                if (_.has(data, 'content_type')) {
-                    self.return_content_type(data.content_type);
-                }
-
-                if (_.has(data, 'body')) {
-                    self.answer(data.body);
-                }
-
-                if (_.has(data, 'content_length')) {
-                    self.content_length(data.content_length);
-                }
-
-                if (_.has(data, 'all_headers')) {
-                    self.all_headers(data.all_headers);
-                }
+                self.answer(data);
 
             }).
         error(function(){
