@@ -30,6 +30,22 @@ function RestRoutingViewModel() {
         return _.isEmpty(self.address().trim()) === false;
     };
 
+    self.is_add_available = function() {
+        return true;
+    }
+
+    self is_remove_available = function() {
+        return true;
+    }
+
+    self.remove_field = function() {
+        
+    }
+
+    self.add_field = function() {
+
+    }
+
     self.execRest = function() {
         var params = {method: self.method(),
                       address: self.address(),

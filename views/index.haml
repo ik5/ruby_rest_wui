@@ -31,10 +31,12 @@
 
         %div.row
           %div.small-12.medium-6.large-6.columns.text-center
-            %a{class: 'small button'}="Add"
+            %a{class: 'small button',
+               data: {bind:'click: add_field, attr: {"disabled": is_add_available() === false}'}}="Add"
 
           %div.small-12.medium-6.large-6.columns.text-center
-            %a{class: 'small alert button'}="Remove"
+            %a{class: 'small alert button',
+               data: {bind: 'click: remove_field, attr:{"disabled": is_remove_available() === false}'}}="Remove"
 
         %div.row
           %label{for: 'field_list'}="Field List:"
