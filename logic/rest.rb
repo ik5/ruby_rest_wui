@@ -83,15 +83,25 @@ class REST < Sinatra::Base
     res.body         = content unless content.empty?
     answer = http.request(res)
 
-    result                  = {return_code: answer.code}
-    result[:content_type]   = answer['content-type'] if answer.key? 'content-type'
-    result[:body]           = answer.body
-    result[:content_length] = answer['content-length'] if answer.key? 'content-length'
-    result[:all_headers]    = answer.to_hash
-    result[:uri]            = answer.uri
+    result = []
+    result << {key: :code, value: answer.code}
+    result << {key: :content_type, value: answer['content-type']}    if answer.key? 'content-type'
+    result << {key: :content_length, value:answer['content-length']} if answer.key? 'content-length'
+    result << {key: :body, value: answer.body}
+    result << {key: :uri, value: answer.uri}
+    result << {key: :conten_range, value: answer.content_range}      if answer.content_range
+    result << {key: :range, value: answer.range}                     if answer.range
+    result << {key: :range_length, value: answer.range_length}       if answer.range_length
+    result << {key: :chunked?, value: answer.chunked?}
+    result << {key: :length, value: answer.length}
+    result << {key: :sub_type, value: answer.sub_type}
+    result << {key: :msg, value: answer.msg}
+    answer.to_hash.each_pair do |k,v|
+      result << {key: k, value: v}
+    end
     result.to_json
-  rescue => e
-    {error: "Exception was raised: #{e.message}"}.to_json
+  #rescue => e
+  #  {error: "Exception was raised: #{e.message}"}.to_json
   end
 
   post '/request' do
