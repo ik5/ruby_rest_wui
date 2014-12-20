@@ -18,7 +18,7 @@ function RestRoutingViewModel() {
     self.field_selected      = ko.observable();
     self.content             = ko.observable();
 
-    self.answer              = ko.observable();
+    self.answer              = ko.observableArray();
 
     self.can_send = function() {
         if (self.address() === undefined) {
