@@ -2,7 +2,7 @@
 %html
   %head
     %meta{charset: "utf-8"}
-    %title= "REST Client"
+    %title= "REST Client #{@title || ''}"
     %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
     %link{ href: "/css/normalize.css", media: "screen", rel: "stylesheet" }
     %link{ href: "/css/foundation.min.css", media: "screen", rel: "stylesheet" }
@@ -10,10 +10,33 @@
     %script{type: "text/javascript", src: "/js/vendor/modernizr.js"}
   %body
 
-    %header
+    - unless defined? @page == 'login'
+      %div.contain-to-grid
+        %nav.top-bar{"data-topbar" => "", :role => "navigation"}
+          %ul.title-area
+            %li.name
+            / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+            %li.toggle-topbar.menu-icon
+              %a{:href => ""}
+                %span=""
+          %section.top-bar-section
+            %ul.left
+              %li
+                %a{href: '/'} Home
+              %li.divider
+              %li
+                %a{href: "#"} Settings
+              %li.divider
+            / Right Nav Section
+            %ul.right
+              %li.divider
+              %li
+                %a{:href => "#"} Logout
+
+    %header.page
       %div.row
         %div.large-12.columns
-          %h1= "REST Client"
+          %h1= "REST Client #{@title || ''}"
       %div#messages.row.hide
         %div{id: 'alert_box', data: {alert: ''}, class: "alert-box" }
           %strong#message_title
@@ -32,6 +55,8 @@
     %script{src: "/js/vendor/knockout-3.2.0.js"}
     %script{src: "/js/vendor/lodash.min.js"}
     %script{src: "/js/messages.js"}
-    %script{src: "/js/rest_client.js"}
+    - unless defined? @page == 'login'
+      %script{src: "/js/foundation/foundation.topbar.js"}
+      %script{src: "/js/rest_client.js"}
     %script
       $(document).foundation();

@@ -6,3 +6,5 @@ select#field_list { height: 8em; }
 div.title { border-right: 1px solid black; border-bottom: 1px dotted black; }
 div.title:last-child{ border-right: 0; }
 div.list { border-bottom: 1px dashed black; border-right: 1px dotted black; border-left: 1px dotted black;}
+
+header.page { margin-top: 1.85em; }
