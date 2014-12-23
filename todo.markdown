@@ -10,6 +10,6 @@
 8. Expand readme, as we go
 9. Syntax Highlight of Body
 10. Parameter Validity
-11. trigger other things (for example help Jenkins) 
+11. trigger other things (for example help Jenkins)
 12. Save and load tests based on projects
 
