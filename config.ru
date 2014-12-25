@@ -11,7 +11,7 @@ require 'sinatra'
 require 'sinatra/partial'
 #require 'nokogiri'
 
-require_relative 'logic/app'
+require_relative 'app/logic/app'
 
 run App
 

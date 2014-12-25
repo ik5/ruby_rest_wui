@@ -7,9 +7,9 @@ class REST < Sinatra::Base
 
   configure do
     enable :logging, :sessions
-    set :root, File.expand_path(File.join('../',File.basename(__FILE__)))
-    set :public_folder, 'public'
-    set :views, 'views'
+    set :root, File.expand_path(File.join('..','..',File.basename(__FILE__)))
+    set :public_folder, File.join('app', 'assets')
+    set :views, File.join('app' ,'templates')
 
     register Sinatra::Partial
     set :partial_template_engine, :haml
