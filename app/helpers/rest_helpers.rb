@@ -8,13 +8,23 @@ module Sinatra
   module RESTHelper
 
     def escpae_uri(parameters)
-      parameters.map{|i| i.split('=').map{|a| URI.escape(a)}.join('=') }.join('&')
+      items = []
+      parameters.each_pair do |k, v|
+        if v.kind_of? Hash
+          if v.key?('key') && v.key?('value')
+            items << URI.escape(v['key']) + '=' + URI.escape(v['value'])
+          end
+        end
+      end
+
+      items.join('&')
     end
 
     def params_to_hash(parameters={})
       params = {}
-      parameters.each do |i|
-        k,v = i.split('=')
+      parameters.each_pair do |key, value|
+        next unless value.key?('key') && value.key?('value')
+        k,v = value['key'], value['value']
         if params.key? k # array ?
           if params[k].kind_of? Array #already an array ?
             params[k] = params[k] + [v]
@@ -80,7 +90,13 @@ module Sinatra
       result << {key: :sub_type, value: answer.sub_type}
       result << {key: :msg, value: answer.msg}
       answer.to_hash.each_pair do |k,v|
-        result << {key: k, value: v}
+        if v.kind_of? Array
+          v.each do |i|
+            result << {key: k, value: i}
+          end
+        else
+          result << {key: k, value: v}
+        end
       end
       result.to_json
       #rescue => e
