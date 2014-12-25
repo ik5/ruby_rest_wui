@@ -14,7 +14,7 @@ class Testing < Sinatra::Base
     register Sinatra::Reloader
   end
 
-  get '/test_get' do
+  get '/test_plain' do
     plain_answer(params)
   end
 
@@ -28,7 +28,7 @@ class Testing < Sinatra::Base
     plain_xml(params)
   end
 
-  post '/test_post' do
+  post '/test_plain' do
     plain_answer(params)
   end
 
@@ -42,7 +42,7 @@ class Testing < Sinatra::Base
     plain_xml(params)
   end
 
-  put '/test_put/:id' do |id|
+  put '/test_plain/:id' do |id|
     params['path_id'] = id
     plain_answer(params)
   end
@@ -59,7 +59,7 @@ class Testing < Sinatra::Base
     plain_xml(params)
   end
 
-  delete '/test_delete/:id' do |id|
+  delete '/test_plain/:id' do |id|
     params['path_id'] = id
     plain_answer(params)
   end
