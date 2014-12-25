@@ -33,3 +33,7 @@ function report_success(message) {
 function report_warning(message) {
     show_message('warning', 'Warning: ', message);
 }
+
+function hide_message() {
+    $('#messages').addClass('hide');
+}
