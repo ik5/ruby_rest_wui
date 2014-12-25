@@ -27,7 +27,7 @@ and DELETE requests, supporting "regular" mime types, json and XML.
 The PUT and DELETE must have an id of some sort in order to work:
 
 Existed checks:
-* /test_get, /test_post, /test_put/:id, /test_delete/:id
+* /test_plain
 * /test_json
 * /test_xml
 
