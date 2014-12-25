@@ -14,7 +14,8 @@ function RestRoutingViewModel() {
     self.address             = ko.observable();
     self.format              = ko.observable();
     self.field_list          = ko.observableArray();
-    self.field_edit          = ko.observable();
+    self.field_key           = ko.observable();
+    self.field_value         = ko.observable();
     self.field_selected      = ko.observable();
     self.content             = ko.observable();
     self.storedItems         = ko.observableArray();
@@ -29,8 +30,11 @@ function RestRoutingViewModel() {
     };
 
     self.is_add_available = function() {
-        var field = self.field_edit();
-        return field !== undefined && _.indexOf(self.field_list(), field) === -1;
+        var field_key   = self.field_key();
+        var field_value = self.field_value();
+        return field_key !== undefined && field_key !== null &&
+            ! _.isEmpty(field_key) &&
+            _.indexOf(self.field_list(), field_key + '=' + field_value) === -1;
     };
 
     self.is_remove_available = function() {
