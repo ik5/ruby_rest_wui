@@ -30,11 +30,11 @@
                    data: {bind: "value: field_edit"}}
 
         %div.row
-          %div.small-12.medium-6.large-6.columns.text-center
+          %div.small-6.medium-6.large-6.columns.text-center
             %a{class: 'small button',
                data: {bind:'click: add_field, attr: {"disabled": is_add_available() === false}'}}="Add"
 
-          %div.small-12.medium-6.large-6.columns.text-center
+          %div.small-6.medium-6.large-6.columns.text-center
             %a{class: 'small alert button',
                data: {bind: 'click: remove_field, attr:{"disabled": is_remove_available() === false}'}}="Remove"
 
