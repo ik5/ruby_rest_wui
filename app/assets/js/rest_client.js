@@ -17,6 +17,7 @@ function RestRoutingViewModel() {
     self.field_edit          = ko.observable();
     self.field_selected      = ko.observable();
     self.content             = ko.observable();
+    self.storedItems         = ko.observableArray();
 
     self.answer              = ko.observableArray();
 
@@ -35,6 +36,25 @@ function RestRoutingViewModel() {
     self.is_remove_available = function() {
         var selected = self.field_selected();
         return selected !== undefined && _.indexOf(self.field_list(), selected) > -1;
+    };
+
+    self.have_storage = function() {
+        return typeof(Storage) !== 'undefined';
+    };
+
+    self.list_requests = function() {
+        if (! self.have_storage()) {
+            return ;
+        }
+
+        self.storedItems(localStorage.stored_requests || []);
+    };
+
+    self.save_request = function() {
+        if (! self.have_storage()) {
+            report_error('Your browser does not support local storage');
+            return;
+        }
     };
 
     self.remove_field = function() {
