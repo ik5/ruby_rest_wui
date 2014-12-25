@@ -41,24 +41,24 @@
 
           /%div.small-1.medium-1.large-1.columns.text-right
 
-        %div.row.text-center{data: {bind: 'visible: field_list > 0'}}
+        %div.row.text-center{data: {bind: 'visible: field_list().length != 0'}}
           %div.small-5.medium-5.large-5.columns
             %strong Field Keys
 
           %div.small-6.medium-6.large-6.columns.end
             %strong Field Values
 
-        %div{data: {bind: 'foreach field_list'}}
-          %div.row{data: {bind: 'visible: field_list.length > 0'}}
+        %div{data: {bind: 'foreach: field_list'}}
+          %div.row
             %div.small-5.medium-5.large-5.columns
-              %input{type: 'text', data: {bind: 'value: $data.key'}}
+              %span{data: {bind: 'text: $data.key'}}
 
             %div.small-6.medium-6.large-6.columns
-              %input{type: 'text', data: {bind: 'value: $data.value' }}
+              %span{data: {bind: 'text: $data.value' }}
 
-            %div.small-1.medium-1.large-1.columns.text-left
+            %div.small-1.medium-1.large-1.columns.text-left.has-tip.tip-bottom.radius{title: 'Remove Item', 'data-tooltip' => '' }
               %a{class: 'tiny alert button',
-              data: {bind: 'click: remove_field, attr:{"disabled": is_remove_available() === false}'}}="-"
+              data: {bind: 'click: $parent.remove_field, attr:{"disabled": $parent.is_remove_available($data) === false}'}}="-"
 
         %div.row
           %div.small-12.medium-12.large-12.columns
