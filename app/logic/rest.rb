@@ -42,7 +42,7 @@ class REST < Sinatra::Base
       return {error: 'Unknown Mime Type'}.to_json
     end
 
-    unless parameters.nil? || parameters.kind_of?(Array)
+    unless parameters.nil? || parameters.kind_of?(Hash)
       return {error: 'Unknown type of parameters were given'}.to_json
     end
 
