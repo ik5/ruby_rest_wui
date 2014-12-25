@@ -34,12 +34,11 @@ function RestRoutingViewModel() {
         var field_value = self.field_value();
         return field_key !== undefined && field_key !== null &&
             ! _.isEmpty(field_key) &&
-            _.indexOf(self.field_list(), field_key + '=' + field_value) === -1;
+            _.findIndex(self.field_list(), {key: field_key, value: field_value}) === -1;
     };
 
-    self.is_remove_available = function() {
-        var selected = self.field_selected();
-        return selected !== undefined && _.indexOf(self.field_list(), selected) > -1;
+    self.is_remove_available = function(item) {
+        return item !== undefined && _.findIndex(self.field_list(), item) > -1;
     };
 
     self.have_storage = function() {
@@ -62,13 +61,13 @@ function RestRoutingViewModel() {
     };
 
     self.remove_field = function() {
-        var selected = self.field_selected();
+        var selected = this;
         if (selected === undefined) {
             return report_error('No field was selected to be removed');
         }
 
-        if (! _.isEmpty(selected.trim())) {
-            if (_.indexOf(self.field_list(), selected) > -1) {
+        if (! _.isEmpty(selected)) {
+            if (_.findIndex(self.field_list(), selected) > -1) {
               self.field_list.remove(selected);
             } else {
                 report_error('Unable to find selected field to remove');
@@ -80,13 +79,18 @@ function RestRoutingViewModel() {
     };
 
     self.add_field = function() {
-        var field = self.field_edit();
-        if (field === undefined) {
-            return report_error('Field Edit is empty');
+        hide_message();
+        var field_key   = self.field_key();
+        var field_value = self.field_value() || '';
+        if (field_key === undefined) {
+            return report_error('Field key is empty');
         }
-        if (! _.isEmpty(field.trim())) {
-            if (_.indexOf(self.field_list(), field) === -1) {
-                self.field_list.push(field);
+
+        if (! _.isEmpty(field_key.trim())) {
+            var obj = {key: field_key, value: field_value};
+            if (_.findIndex(self.field_list(), obj) === -1) {
+                self.field_list.push(obj);
+                $(document).foundation('tooltip', 'reflow');
             } else {
                 report_error('Field alreay exists in the list');
             }
@@ -104,8 +108,7 @@ function RestRoutingViewModel() {
         $.post('/request', params).
             done(function(data, req_status, req_obj) {
                 self.answer(data);
-                $('#messages').addClass('hide');
-
+                hide_message();
             }).
         error(function(data){
             self.answer([{key: 'Error', value: 'There was an error with the request'},
