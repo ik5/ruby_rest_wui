@@ -100,10 +100,17 @@ function RestRoutingViewModel() {
         $.post('/request', params).
             done(function(data, req_status, req_obj) {
                 self.answer(data);
+                $('#messages').addClass('hide');
 
             }).
-        error(function(){
-            report_error('Unable to communicate with the server');
+        error(function(data){
+            self.answer([{key: 'Error', value: 'There was an error with the request'},
+                         {key: 'code', value: data.status},
+                         {key: 'statusText', value: data.statusTest},
+                         {key: 'responseText', value: data.responseText},
+                         {key: 'readyState', value: data.readyState},
+            ]);
+            report_error('Unable to communicate with the server, or bad error code');
         });
 
     };
