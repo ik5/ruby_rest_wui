@@ -24,24 +24,41 @@
                    data: {bind: "value: format"}}
 
         %div.row
-          %div.small-12.medium-12.large-12.columns
-            %label{for: 'field_edit'}="Field Edit:"
-            %input{id: 'field_edit', type: 'text', placeholder: "key=value",
-                   data: {bind: "value: field_edit"}}
+          %div.small-5.medium-5.large-5.columns
+            %label{for: 'field_key'}="Field Key:"
+            %input{id: 'field_key', type: 'text', placeholder: "key",
+                   data: {bind: "value: field_key"}}
 
-        %div.row
-          %div.small-6.medium-6.large-6.columns.text-center
-            %a{class: 'small button',
-               data: {bind:'click: add_field, attr: {"disabled": is_add_available() === false}'}}="Add"
+          %div.small-6.medium-6.large-6.columns
+            %label{for: 'field_value'}="Field Value:"
+            %input{id:'field_value', type: 'text', placeholder: 'value',
+                  data: {bind: 'value: field_value'}}
 
-          %div.small-6.medium-6.large-6.columns.text-center
-            %a{class: 'small alert button',
-               data: {bind: 'click: remove_field, attr:{"disabled": is_remove_available() === false}'}}="Remove"
+          %div.small-1.medium-1.large-1.columns.text-left.has-tip.tip-top.radius{title: 'Add key and value to the list', 'data-tooltip' => ''}
+            %br
+            %a{class: 'tiny button',
+              data: {bind:'click: add_field, attr: {"disabled": is_add_available() === false}'} }="+"
 
-        %div.row
-          %label{for: 'field_list'}="Field List:"
-          %select{size: 5, id: 'field_list',
-                  data: {bind: 'options: field_list, value: field_selected'}}
+          /%div.small-1.medium-1.large-1.columns.text-right
+
+        %div.row.text-center{data: {bind: 'visible: field_list > 0'}}
+          %div.small-5.medium-5.large-5.columns
+            %strong Field Keys
+
+          %div.small-6.medium-6.large-6.columns.end
+            %strong Field Values
+
+        %div{data: {bind: 'foreach field_list'}}
+          %div.row{data: {bind: 'visible: field_list.length > 0'}}
+            %div.small-5.medium-5.large-5.columns
+              %input{type: 'text', data: {bind: 'value: $data.key'}}
+
+            %div.small-6.medium-6.large-6.columns
+              %input{type: 'text', data: {bind: 'value: $data.value' }}
+
+            %div.small-1.medium-1.large-1.columns.text-left
+              %a{class: 'tiny alert button',
+              data: {bind: 'click: remove_field, attr:{"disabled": is_remove_available() === false}'}}="-"
 
         %div.row
           %div.small-12.medium-12.large-12.columns
