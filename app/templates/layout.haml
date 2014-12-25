@@ -57,6 +57,7 @@
     %script{src: "/js/messages.js"}
     - unless defined? @page == 'login'
       %script{src: "/js/foundation/foundation.topbar.js"}
+      %script{src: "/js/foundation/foundation.tooltip.js"}
       %script{src: "/js/rest_client.js"}
     %script
-      $(document).foundation();
+      $(document).foundation('tooltip', 'reflow');
