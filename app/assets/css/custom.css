@@ -8,3 +8,8 @@ div.title:last-child{ border-right: 0; }
 div.list { border-bottom: 1px dashed black; border-right: 1px dotted black; border-left: 1px dotted black;}
 
 header.page { margin-top: 1.85em; }
+
+ul.request, ol.request {list-style-type: none; }
+.eol {border-bottom: 1px dotted silver; padding: 0; margin: 0;}
+
+.row.full { max-width: 95%; }
