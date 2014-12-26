@@ -19,7 +19,6 @@ function RestRoutingViewModel() {
     self.field_selected      = ko.observable();
     self.content             = ko.observable();
     self.storedNames         = ko.observableArray();
-    self.selected_request    = ko.observable();
     self.request_name        = ko.observable();
 
     self.answer              = ko.observableArray();
@@ -81,13 +80,14 @@ function RestRoutingViewModel() {
     };
 
     self.load_request = function() {
-        var request = self.selected_request();
+        var request = this;
 
         self.method(localStorage.getItem('request_name.' + request +'.method'));
         self.address(localStorage.getItem('request_name.' + request + '.address'));
         self.format(localStorage.getItem('request_name.' + request + '.format'));
         self.content(localStorage.getItem('request_name.' + request + '.content'));
         var len = localStorage.getItem('request_name.' + request + '.fields_length');
+        self.field_list([]);
         for (var i = 0; i < len ; i++) {
           var key   = localStorage.getItem('request_name.' + request + '.field[' + i + '].key');
           var value = localStorage.getItem('request_name.' + request + '.field[' + i + '].value');
