@@ -44,10 +44,12 @@ function RestRoutingViewModel() {
     };
 
     self.can_load_request = function() {
-       return self.selected_request() !== undefined &&
+        return true;
+/*       return self.selected_request() !== undefined &&
               self.selected_request() !== null &&
               _.isEmpty(self.selected_request().trim()) !== false &&
               _.findIndex(self.storedNames(), self.selected_request()) !== -1;
+*/
     };
 
     self.can_save_request = function() {
@@ -79,8 +81,19 @@ function RestRoutingViewModel() {
     };
 
     self.load_request = function() {
-        var request = this;
-        console.log(request);
+        var request = self.selected_request();
+
+        self.method(localStorage.getItem('request_name.' + request +'.method'));
+        self.address(localStorage.getItem('request_name.' + request + '.address'));
+        self.format(localStorage.getItem('request_name.' + request + '.format'));
+        self.content(localStorage.getItem('request_name.' + request + '.content'));
+        var len = localStorage.getItem('request_name.' + request + '.fields_length');
+        for (var i = 0; i < len ; i++) {
+          var key   = localStorage.getItem('request_name.' + request + '.field[' + i + '].key');
+          var value = localStorage.getItem('request_name.' + request + '.field[' + i + '].value');
+          var obj = {key: key, value: value};
+          self.field_list.push(obj);
+        }
     };
 
     self.save_request = function() {
@@ -89,8 +102,19 @@ function RestRoutingViewModel() {
             return;
         }
 
+        var len = self.field_list().length;
+
         self.storedNames.push(self.request_name());
         localStorage.setItem('request_names', self.storedNames().toString());
+        localStorage.setItem('request_name.' + self.request_name() + '.method', self.method() || '');
+        localStorage.setItem('request_name.' + self.request_name() + '.address', self.address() || '');
+        localStorage.setItem('request_name.' + self.request_name() + '.format', self.format() || '');
+        localStorage.setItem('request_name.' + self.request_name() + '.content', self.content() || '');
+        localStorage.setItem('request_name.' + self.request_name() + '.fields_length', len);
+        for (var i=0; i < len ; i++) {
+          localStorage.setItem('request_name.' + self.request_name() + '.field[' + i +'].key', self.field_list()[i].key);
+          localStorage.setItem('request_name.' + self.request_name() + '.field[' + i +'].value', self.field_list()[i].value || '');
+        }
     };
 
     self.remove_field = function() {
