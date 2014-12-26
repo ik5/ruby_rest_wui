@@ -7,27 +7,27 @@
     %link{ href: "/css/normalize.css", media: "screen", rel: "stylesheet" }
     %link{ href: "/css/foundation.min.css", media: "screen", rel: "stylesheet" }
     %link{ href: "/css/custom.css", media: "screen", rel: "stylesheet" }
+    %link{ href: "/css/codemirror.css", media: "screen", rel: "stylesheet" }
     %script{type: "text/javascript", src: "/js/vendor/modernizr.js"}
   %body
 
-    - unless defined? @page == 'login'
-      %div.contain-to-grid
-        %nav.top-bar.sticky{data: {topbar: '', options: ''}, :role => "navigation"}
-          %ul.title-area
-            %li.name
-            / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
-            %li.toggle-topbar.menu-icon
-              %a{:href => ""}
-                %span=""
-          %section.top-bar-section
-            %ul.left
-              %li
-                %a{href: '/'} Home
-              %li.divider
+    %div.contain-to-grid
+      %nav.top-bar.sticky{data: {topbar: '', options: ''}, :role => "navigation"}
+        %ul.title-area
+          %li.name
+          / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+          %li.toggle-topbar.menu-icon
+            %a{:href => ""}
+              %span=""
+        %section.top-bar-section
+          %ul.left
+            %li
+              %a{href: '/'} Home
+            %li.divider
 
-            / Right Nav Section
-            /%ul.right
-            /  %li.divider
+          / Right Nav Section
+          /%ul.right
+          /  %li.divider
 
     %div.row.full
 
@@ -76,10 +76,10 @@
     %script{src: "/js/vendor/knockout-3.2.0.js"}
     %script{src: "/js/vendor/lodash.min.js"}
     %script{src: "/js/messages.js"}
-    - unless defined? @page == 'login'
-      %script{src: "/js/foundation/foundation.topbar.js"}
-      %script{src: "/js/foundation/foundation.tooltip.js"}
-      %script{src: "/js/rest_client.js"}
+    %script{src: "/js/foundation/foundation.topbar.js"}
+    %script{src: "/js/foundation/foundation.tooltip.js"}
+    %script{src: "/js/codemirror.js"}
+    %script{src: "/js/rest_client.js"}
     %script
       $(document).foundation('tooltip', 'reflow');
       $(document).foundation('topbar', 'reflow');
