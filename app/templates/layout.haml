@@ -11,8 +11,8 @@
   %body
 
     - unless defined? @page == 'login'
-      %div.contain-to-grid.sticky
-        %nav.top-bar.sticky{data: {topbar: '', options: 'sticky_on: large'}, :role => "navigation"}
+      %div.contain-to-grid
+        %nav.top-bar.sticky{data: {topbar: '', options: ''}, :role => "navigation"}
           %ul.title-area
             %li.name
             / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
@@ -26,39 +26,49 @@
               %li.divider
 
             / Right Nav Section
-            %ul.right
-              %li.divider
-              %li.has-form
-                %form
-                  %div.row.collapse
-                    %div.small-3.medium-3.large-3.columns
-                      %select{id: "request_list", data: {bind: "options: storedNames, value: selected_request"}}
-                    %div.small-2.medium-2.large-2.columns
-                      %a.tiny.button{data: {bind: 'click: load_request, attr: {disabled: can_load_request() === false}'}} Load
-                    %div.small-2.medium-2.large-2.columns
-                      %a.tiny.alert.button{data: {bind: ''}} -
-                    %div.small-3.medium-3.large-3.columns
-                      %input{id: "request_name", type: "text", placeholder:"some name",
-                             data: {bind: "value: request_name"}}
-                    %div.small-2.medium-2.large-2.columns
-                      %a.tiny.button{data: {bind: 'click: save_request, attr: {disabled: can_save_request() === false}'}} Save
+            /%ul.right
+            /  %li.divider
 
+    %div.row.full
 
-    %header.page
+      %header.page
+        %div.row
+          %div.large-12.columns
+            %h1= "REST Client #{@title || ''}"
+        %div#messages.row.hide
+          %div{id: 'alert_box', data: {alert: ''}, class: "alert-box" }
+            %strong#message_title
+            %span#message_content
+            %a.close="&times;"
+
       %div.row
-        %div.large-12.columns
-          %h1= "REST Client #{@title || ''}"
-      %div#messages.row.hide
-        %div{id: 'alert_box', data: {alert: ''}, class: "alert-box" }
-          %strong#message_title
-          %span#message_content
-          %a.close="&times;"
+        %div.small-12.medium-2.large-2.columns
+          %h3 Save/Restore Requests:
+          %div.row
+            %div.small-9.medium-9.large-9.columns
+              %input{id: "request_name", type: "text", placeholder:"request name",
+                     data: {bind: "value: request_name"}}
+            %div.small-3.medium-3.lage-3.columns.text-left
+              %a.tiny.button{data: {bind: 'click: save_request, attr: {disabled: can_save_request() === false}'}} Save
+              %br
+          %ul.request{data: {bind: 'foreach: storedNames'}}
+            %li.eol
+              %div.row
+                %div.small-10.medium-10.large-10.columns
+                  %br
+                  %a{data: {bind: 'text: $data, click: $root.load_request'}}
+                %div.small-2.medium-2.large-2.columns.text-right
+                  %br
+                  %a.tiny.alert.button{data: {bind: ''}} -
 
-    #content= yield
 
-    %footer.text-center
-      Copyright &copy; 2014 LINESIP under
-      %a{href: "http://opensource.org/licenses/MIT"}="MIT License"
+
+        %div.small-12.medium-10.large-10.columns
+          #content= yield
+
+      %footer.text-center
+        Copyright &copy; 2014 LINESIP under
+        %a{href: "http://opensource.org/licenses/MIT"}="MIT License"
 
     %script{src: "/js/vendor/jquery.js"}
     %script{src: "/js/foundation.min.js"}
