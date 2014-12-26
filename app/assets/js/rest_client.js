@@ -42,22 +42,9 @@ function RestRoutingViewModel() {
         return item !== undefined && _.findIndex(self.field_list(), item) > -1;
     };
 
-    self.can_load_request = function() {
-        return true;
-/*       return self.selected_request() !== undefined &&
-              self.selected_request() !== null &&
-              _.isEmpty(self.selected_request().trim()) !== false &&
-              _.findIndex(self.storedNames(), self.selected_request()) !== -1;
-*/
-    };
-
     self.can_save_request = function() {
-        /*
         return self.request_name() !== undefined && self.request_name() !== null &&
-            _.isEmpty(self.request_name().trim()) === false &&
-            _.findIndex(self.storedItems(), self.request_name().trim()) === -1;
-            */
-        return true;
+            _.isEmpty(self.request_name().trim()) === false;
     };
 
     self.have_storage = function() {
@@ -71,7 +58,7 @@ function RestRoutingViewModel() {
 
         //self.storedItems(localStorage.storeditems || []);
         var names = localStorage.getItem('request_names');
-        if (names === null) {
+        if (names === undefined || names === null || _.isEmpty(names)) {
             names = [];
         } else {
             names = names.split(',');
@@ -114,6 +101,24 @@ function RestRoutingViewModel() {
         for (var i=0; i < len ; i++) {
           localStorage.setItem('request_name.' + self.request_name() + '.field[' + i +'].key', self.field_list()[i].key);
           localStorage.setItem('request_name.' + self.request_name() + '.field[' + i +'].value', self.field_list()[i].value || '');
+        }
+    };
+
+    self.remove_request = function() {
+        var request = this.toString();
+
+        self.storedNames.remove(request);
+        localStorage.setItem('request_names', self.storedNames().toString());
+
+        var len = localStorage.getItem('request_name.' + request + '.fields_length');
+        localStorage.removeItem('request_name.' + request +'.method');
+        localStorage.removeItem('request_name.' + request + '.address');
+        localStorage.removeItem('request_name.' + request + '.format');
+        localStorage.removeItem('request_name.' + request + '.content');
+        localStorage.removeItem('request_name.' + request + '.fields_length');
+        for (var i = 0; i < len ; i++) {
+          localStorage.removeItem('request_name.' + request + '.field[' + i + '].key');
+          localStorage.removeItem('request_name.' + request + '.field[' + i + '].value');
         }
     };
 
