@@ -66,6 +66,14 @@ function RestRoutingViewModel() {
         self.storedNames(names);
     };
 
+    self.set_request_action = function() {
+        if (_.indexOf(self.storedNames(),self.request_name()) > -1) {
+            return 'Update';
+        } else {
+            return 'Save';
+        }
+    };
+
     self.load_request = function() {
         var request = this;
 
@@ -91,7 +99,10 @@ function RestRoutingViewModel() {
 
         var len = self.field_list().length;
 
-        self.storedNames.push(self.request_name());
+        if (_.indexOf(self.storedNames(), self.request_name()) === -1) {
+          self.storedNames.push(self.request_name());
+        }
+
         localStorage.setItem('request_names', self.storedNames().toString());
         localStorage.setItem('request_name.' + self.request_name() + '.method', self.method() || '');
         localStorage.setItem('request_name.' + self.request_name() + '.address', self.address() || '');
