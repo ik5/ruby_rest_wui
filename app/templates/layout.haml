@@ -11,8 +11,8 @@
   %body
 
     - unless defined? @page == 'login'
-      %div.contain-to-grid
-        %nav.top-bar{"data-topbar" => "", :role => "navigation"}
+      %div.contain-to-grid.sticky
+        %nav.top-bar.sticky{data: {topbar: '', options: 'sticky_on: large'}, :role => "navigation"}
           %ul.title-area
             %li.name
             / Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
@@ -24,14 +24,25 @@
               %li
                 %a{href: '/'} Home
               %li.divider
-              %li
-                %a{href: "#"} Settings
-              %li.divider
+
             / Right Nav Section
-            / %ul.right
-            /    %li.divider
-            /    %li
-            /      %a{:href => "#"} Logout
+            %ul.right
+              %li.divider
+              %li.has-form
+                %form
+                  %div.row.collapse
+                    %div.small-3.medium-3.large-3.columns
+                      %select{id: "request_list", data: {bind: "options: storedNames, value: selected_request"}}
+                    %div.small-2.medium-2.large-2.columns
+                      %a.tiny.button{data: {bind: 'click: load_request, attr: {disabled: can_load_request() === false}'}} Load
+                    %div.small-2.medium-2.large-2.columns
+                      %a.tiny.alert.button{data: {bind: ''}} -
+                    %div.small-3.medium-3.large-3.columns
+                      %input{id: "request_name", type: "text", placeholder:"some name",
+                             data: {bind: "value: request_name"}}
+                    %div.small-2.medium-2.large-2.columns
+                      %a.tiny.button{data: {bind: 'click: save_request, attr: {disabled: can_save_request() === false}'}} Save
+
 
     %header.page
       %div.row
@@ -61,3 +72,4 @@
       %script{src: "/js/rest_client.js"}
     %script
       $(document).foundation('tooltip', 'reflow');
+      $(document).foundation('topbar', 'reflow');
