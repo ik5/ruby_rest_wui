@@ -45,11 +45,11 @@
         %div.small-12.medium-2.large-2.columns
           %h3 Save/Restore Requests:
           %div.row
-            %div.small-9.medium-9.large-9.columns
+            %div.small-8.medium-8.large-8.columns
               %input{id: "request_name", type: "text", placeholder:"request name",
                      data: {bind: "value: request_name"}}
-            %div.small-3.medium-3.lage-3.columns.text-left
-              %a.tiny.button{data: {bind: 'click: save_request, attr: {disabled: can_save_request() === false}'}} Save
+            %div.small-4.medium-4.lage-4.columns.text-left
+              %a.tiny.button{data: {bind: 'click: save_request, attr: {disabled: can_save_request() === false}, text: set_request_action()'}}
               %br
           %ul.request{data: {bind: 'foreach: storedNames'}}
             %li.eol
