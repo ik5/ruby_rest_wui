@@ -18,7 +18,9 @@ function RestRoutingViewModel() {
     self.field_value         = ko.observable();
     self.field_selected      = ko.observable();
     self.content             = ko.observable();
-    self.storedItems         = ko.observableArray();
+    self.storedNames         = ko.observableArray();
+    self.selected_request    = ko.observable();
+    self.request_name        = ko.observable();
 
     self.answer              = ko.observableArray();
 
@@ -41,6 +43,22 @@ function RestRoutingViewModel() {
         return item !== undefined && _.findIndex(self.field_list(), item) > -1;
     };
 
+    self.can_load_request = function() {
+       return self.selected_request() !== undefined &&
+              self.selected_request() !== null &&
+              _.isEmpty(self.selected_request().trim()) !== false &&
+              _.findIndex(self.storedNames(), self.selected_request()) !== -1;
+    };
+
+    self.can_save_request = function() {
+        /*
+        return self.request_name() !== undefined && self.request_name() !== null &&
+            _.isEmpty(self.request_name().trim()) === false &&
+            _.findIndex(self.storedItems(), self.request_name().trim()) === -1;
+            */
+        return true;
+    };
+
     self.have_storage = function() {
         return typeof(Storage) !== 'undefined';
     };
@@ -50,7 +68,19 @@ function RestRoutingViewModel() {
             return ;
         }
 
-        self.storedItems(localStorage.stored_requests || []);
+        //self.storedItems(localStorage.storeditems || []);
+        var names = localStorage.getItem('request_names');
+        if (names === null) {
+            names = [];
+        } else {
+            names = names.split(',');
+        }
+        self.storedNames(names);
+    };
+
+    self.load_request = function() {
+        var request = this;
+        console.log(request);
     };
 
     self.save_request = function() {
@@ -58,6 +88,9 @@ function RestRoutingViewModel() {
             report_error('Your browser does not support local storage');
             return;
         }
+
+        self.storedNames.push(self.request_name());
+        localStorage.setItem('request_names', self.storedNames().toString());
     };
 
     self.remove_field = function() {
@@ -121,6 +154,8 @@ function RestRoutingViewModel() {
         });
 
     };
+
+    self.list_requests();
 }
 
 var rest_client;
