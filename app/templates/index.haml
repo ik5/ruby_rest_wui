@@ -24,6 +24,19 @@
                    data: {bind: "value: format"}}
 
         %div.row
+          %div.small-12.medium-5.large-5.columns
+            %label{for: 'uname'}='User Name:'
+            %input{type: 'text', id: 'uname'}
+
+          %div.small-12.medium-6.large-6.columns
+            %label{for: 'upass'}='Password:'
+            %input{type: 'text', id: 'upass'}
+
+          %div.small-12.medium-1.large-1.columns
+            %label{for:'auth'}="HTTP Auth? "
+            %input{type: 'checkbox', id: 'auth'}
+
+        %div.row
           %div.small-5.medium-5.large-5.columns
             %label{for: 'field_key'}="Field Key:"
             %input{id: 'field_key', type: 'text', placeholder: "key",
